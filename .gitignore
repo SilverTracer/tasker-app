@@ -1,0 +1,9 @@
+# Ignoring modules. Consumer can later call npm i to upload them.
+node_modules/
+
+# Ignoring build
+# dist/
+
+# Ignoring enviroment variables files
+.env
+.env.local

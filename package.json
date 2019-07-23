@@ -1,0 +1,52 @@
+{
+  "name": "redux_boilerplate",
+  "version": "1.0.0",
+  "description": "Stack: Webpack, React, Redux, Redux-saga.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "build-dev": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production",
+    "start": "webpack-dev-server --hot --mode development"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.9",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.5"
+  },
+  "devDependencies": {
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "css-loader": "^3.1.0",
+    "style-loader": "^0.23.1",
+    "eslint": "^6.1.0",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilverTracer/redux_boilerplate.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "redux-saga",
+    "webpack",
+    "css-modules",
+    "boilerplate"
+  ],
+  "author": "R.Ruhalov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SilverTracer/redux_boilerplate/issues"
+  },
+  "homepage": "https://github.com/SilverTracer/redux_boilerplate#readme"
+}
