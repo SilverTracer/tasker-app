@@ -1,4 +1,6 @@
-# React/Redux/Saga Boilerplate
+# Taske Application project
+
+Here we'll have our application's core and frontend.
 
 ## Building and running on localhost
 
@@ -28,4 +30,4 @@ npm run build-dev
 
 ## Running
 
-Open the file `dist/index.html` in your browser
+Open [localhost:3000](http://localhost:3000) in your browser after ```npm start``` command.
