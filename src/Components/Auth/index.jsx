@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign */
 import React from 'react';
+import jwt from 'jwt-decode';
 
 class Auth extends React.Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class Auth extends React.Component {
     this.state = {
       json: null,
       token: null,
+      user: null,
     };
 
     this.authorizeUser = this.authorizeUser.bind(this);
@@ -28,7 +30,12 @@ class Auth extends React.Component {
       }),
     }).then(res => (
       res.json()
-    )).then(json => this.setState({ token: json.token }));
+    )).then((json) => {
+      this.setState({
+        token: json.token,
+        user: jwt(json.token).data,
+      });
+    });
   }
 
   registerUser() {
@@ -52,12 +59,17 @@ class Auth extends React.Component {
     };
     fetch(`${process.env.API_URL}/auth/signup`, options)
       .then(res => res.json())
-      .then(json => this.setState({ json }));
+      .then((json) => {
+        this.setState({
+          token: json.token,
+          user: jwt(json.token).data,
+        });
+      });
   }
 
   testSend() {
     const { token } = this.state;
-    fetch('http://localhost:8080/test', {
+    fetch(`${process.env.API_URL}/api/test`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -69,9 +81,13 @@ class Auth extends React.Component {
 
   render() {
     const { authorizeUser, registerUser, testSend } = this;
-    const { json } = this.state;
+    const { json, user } = this.state;
     return (
       <div>
+        <h2>
+          Hello,
+          {user ? user.email : ' user'}
+        </h2>
         <div>
           <h3>Authorize user</h3>
           <input type="text" ref={e => this.authMail = e} placeholder="Enter your email" />

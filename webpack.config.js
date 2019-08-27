@@ -6,22 +6,27 @@ const config = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         use: ['babel-loader'],
-        exclude: /node_modules/
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        use: ['ts-loader'],
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader',
         ],
-        exclude: /\.module\.css$/
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.css$/,
@@ -31,19 +36,21 @@ const config = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true
-            }
-          }
+              modules: true,
+            },
+          },
         ],
-        include: /\.module\.css$/
-      }
-    ]
+        include: /\.module\.css$/,
+      },
+    ],
   },
   resolve: {
     extensions: [
       '.js',
-      '.jsx'
-    ]
+      '.jsx',
+      '.ts',
+      '.tsx',
+    ],
   },
   devServer: {
     contentBase: './dist',
