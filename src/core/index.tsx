@@ -1,18 +1,33 @@
 import * as React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import App from '../components/app';
+import Auth from '../containers/auth';
 
-import Store from './store';
+import { store } from './store';
 
-const Wrapper: React.FC = () => {
-  return (
-    <Store>
-      <BrowserRouter>
-        <Route path="/" component={App} />
-      </BrowserRouter>
-    </Store>
-  );
-};
+interface IState {
+  auth: boolean;
+}
 
-export default Wrapper;
+class Application extends React.Component<any, IState> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      auth: Boolean(store.getState().user.token),
+    };
+  }
+
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Route path="/" component={Auth} />
+        </BrowserRouter>
+      </Provider>
+    );
+  }
+}
+
+export default Application;

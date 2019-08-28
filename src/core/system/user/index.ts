@@ -1,3 +1,9 @@
-export { default as TYPES } from './types';
-export { default as ACTION } from './actions';
-export { default as REDUCERS } from './reducers';
+import * as TYPES from './types';
+import * as ACTIONS from './actions';
+import REDUCERS from './reducers';
+
+export {
+  TYPES,
+  ACTIONS,
+  REDUCERS,
+};

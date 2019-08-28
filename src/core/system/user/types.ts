@@ -1,5 +1,5 @@
 export interface IUser {
-  token: string;
+  token?: string;
   created_at: Date | null;
   username: string;
   email: string;

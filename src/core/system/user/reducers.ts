@@ -1,11 +1,28 @@
+import jwt from 'jwt-decode';
+
 import * as TYPES from './types';
 
-const initialState : TYPES.IUser = {
-  token: '',
+const token = localStorage.getItem('token');
+const user : TYPES.IUser = {
   created_at: null,
   username: '',
   email: '',
+};
+
+if (token) {
+  const data : any = jwt(token);
+
+  console.log(data);
+
+  user.created_at = data.created_at;
+  user.username = data.username;
+  user.email = data.email;
+}
+
+const initialState : TYPES.IUser = {
+  token: token || '',
   isFetching: false,
+  ...user,
 };
 
 export default (
