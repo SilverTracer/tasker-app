@@ -3,14 +3,16 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import App from '../components/app';
 
-const Wrapper: React.FC = ({ children }) => {
+import Store from './store';
+
+const Wrapper: React.FC = () => {
   return (
-    <div>
+    <Store>
       <BrowserRouter>
         <Route path="/" component={App} />
       </BrowserRouter>
-    </div>
-  )
-}
+    </Store>
+  );
+};
 
 export default Wrapper;
