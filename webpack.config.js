@@ -33,10 +33,11 @@ const config = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader',
+            loader: 'typings-for-css-modules-loader',
             options: {
-              importLoaders: 1,
               modules: true,
+              exportOnlyLocals: true,
+              namedExport: true,
             },
           },
         ],
@@ -50,6 +51,7 @@ const config = {
       '.jsx',
       '.ts',
       '.tsx',
+      '.css',
     ],
   },
   devServer: {

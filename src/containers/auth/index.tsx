@@ -5,6 +5,7 @@ import { RouteProps } from 'react-router';
 
 import * as USER from '../../core/system/user';
 import { IAppState } from '../../core/store';
+import AuthComponent from '../../components/page/auth';
 
 interface IStateProps {
   user: USER.TYPES.IUser;
@@ -13,9 +14,10 @@ interface IStateProps {
 interface IDispatchProps {
   authenticate: (payload: USER.TYPES.IAuthUser) => void;
   register: (payload: USER.TYPES.IRegUser) => void;
+  logout: () => void;
 }
 
-type Props = IStateProps & IDispatchProps & RouteProps;
+export type Props = IStateProps & IDispatchProps & RouteProps;
 
 const mapStateToProps = (state: IAppState, ownProp: RouteProps) : IStateProps => ({
   user: state.user,
@@ -28,21 +30,12 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: RouteProps) : IDispatc
   register: (payload) => {
     dispatch(USER.ACTIONS.regUserRequest(payload));
   },
+  logout: () => {
+    dispatch(USER.ACTIONS.logOut());
+  },
 });
-
-class Auth extends React.Component<Props> {
-  render() {
-    const { user } = this.props;
-
-    return (
-      <div>
-        Hello, {user.username || 'TS'}!
-      </div>
-    );
-  }
-}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Auth);
+)(AuthComponent);
