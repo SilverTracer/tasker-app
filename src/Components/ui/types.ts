@@ -13,9 +13,9 @@ export type Color =
   'black_1' |
   'black_2' |
 
-  'black' |
-  'black' |
-  'black' |
+  'white' |
+  'white_1' |
+  'white_2' |
 
   'ash' |
   'ash_1' |

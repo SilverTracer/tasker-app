@@ -1,3 +1,19 @@
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
+  word-break: break-word;
+  outline: none!important;
+}
+
 :root {
   --black: #000000;
   --black_1: #191919;
@@ -20,7 +36,22 @@
   --cream_2: #EFE6DC;
 }
 
+/* Global elements */
+
+html, body, #app {
+  height: 100%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+#app {
+  overflow: auto;
+}
+
 /* Theme classes */
+/* ------------------------------------------------------------------ */
 
 /* Text colors */
 .color_black {
@@ -102,24 +133,4 @@
 
 .weight_black {
   font-weight: 900;
-}
-
-/* Global styles */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  -webkit-tap-highlight-color: transparent;
-  word-break: break-word;
-}
-
-body {
-  font-family: "Lato", sans-serif;
 }
