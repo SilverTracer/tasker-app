@@ -5,12 +5,15 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .auth_container {
   width: 100%;
-  max-width: 600px;
+  max-width: 460px;
   padding: 60px 30px;
+  margin: auto;
 }
 
 .title {
@@ -20,4 +23,32 @@
 .description {
   letter-spacing: 0.5px;
   line-height: 1.7;
+  margin-bottom: 60px;
+}
+
+.or_text {
+  margin: 0 20px;
+}
+
+.field {
+  width: 100%;
+  flex-basis: 100%;
+}
+
+.auth_form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.control_block {
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+@media (max-width: 767px) {
+  .auth_block {
+    align-items: flex-start;
+  }
 }

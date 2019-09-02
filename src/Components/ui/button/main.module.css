@@ -1,0 +1,66 @@
+.button {
+  padding: 10px 30px;
+  font-size: 12px;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.button:after {
+  z-index: -1;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  transition: opacity 350ms;
+}
+
+.button:hover:after {
+  opacity: 0.6;
+}
+
+.sky {
+  color: var(--sky);
+}
+.sky:after {
+  background: linear-gradient(45deg, var(--sky), var(--sky_2));
+}
+
+.sky_2 {
+  color: var(--sky_2);
+}
+.sky_2:after {
+  background: linear-gradient(45deg, var(--sky_2), var(--sky_2));
+}
+
+.ash {
+  color: var(--ash);
+}
+.ash:after {
+  background: linear-gradient(45deg, var(--ash), var(--ash_2));
+}
+
+.black {}
+.black_1 {}
+.black_2 {}
+
+.white {}
+.white_1 {}
+.white_2 {}
+
+.sky {}
+.sky_1 {}
+.sky_2 {}
+
+.ash {}
+.ash_1 {}
+.ash_2 {}
+
+.cream {}
+.cream_1 {}
+.cream_2 {}
+

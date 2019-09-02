@@ -12,4 +12,4 @@ export const signInRequest = new API<{}>(
   `${process.env.API_URL}/auth/signin`,
   'application/json',
   10000,
-)
+);

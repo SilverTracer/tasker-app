@@ -16,11 +16,12 @@ class AuthForm extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
 
-    this.name = 'auth';
+    this.name = 'register';
 
     this.inputs = {
       email: React.createRef(),
       password: React.createRef(),
+      username: React.createRef(),
     };
 
     this.formOnSubmit = this.formOnSubmit.bind(this);
@@ -51,6 +52,16 @@ class AuthForm extends React.Component<IProps> {
     return (
       <form id={this.name} onSubmit={this.formOnSubmit} className={css.auth_form}>
         <Field
+          name="username"
+          label="Username"
+          type="text"
+          placeholder="Enter your full name"
+          required={true}
+          ref={this.inputs.username}
+          className={css.field}
+          form={this.name}
+        />
+        <Field
           name="email"
           label="E-mail"
           type="text"
@@ -72,8 +83,9 @@ class AuthForm extends React.Component<IProps> {
         />
         <div className={css.control_block}>
           <Button
-            color="sky"
-            type="submit"
+            color="ash"
+            type="button"
+            onClick={this.props.toggle}
           >
             Log in
           </Button>
@@ -85,9 +97,8 @@ class AuthForm extends React.Component<IProps> {
             or
           </Typography>
           <Button
-            color="ash"
-            type="button"
-            onClick={this.props.toggle}
+            color="sky"
+            type="submit"
           >
             Register
           </Button>

@@ -1,10 +1,18 @@
 import * as React from 'react';
 
+import css from './main.module.css';
+
 interface IProps {
   type: 'text' | 'password' | 'number';
   required: boolean;
+  name: string;
+
   validation?: string[];
   value?: string | number;
+  label?: string;
+  placeholder?: string;
+  className?: string;
+  form?: string;
 
   onChange?(param: any): void;
 }
@@ -20,7 +28,7 @@ class Field extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      valid: false,
+      valid: this.props.required ? false : true,
       focused: false,
       value: this.props.value || '',
     };
@@ -40,9 +48,7 @@ class Field extends React.Component<IProps, IState> {
   }
 
   focusOut() {
-    this.validate();
-
-    if (this.state.valid) {
+    if (!this.state.valid) {
       this.setState({ focused: false });
     }
   }
@@ -50,7 +56,6 @@ class Field extends React.Component<IProps, IState> {
   validate() {
     const { required } = this.props;
 
-    console.log('in validation');
     if (required) {
       if (this.state.value) this.setState({ valid: true });
       else this.setState({ valid: false });
@@ -68,17 +73,32 @@ class Field extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { type } = this.props;
-    const { value } = this.state;
+    const { type, name, label, placeholder, className, form } = this.props;
+    const { value, focused } = this.state;
 
     return (
-      <input
-        type={type}
-        value={value}
-        onChange={this.onChange}
-        onFocus={this.focusIn}
-        onBlur={this.focusOut}
-      />
+      <div className={`${css.field_wrapper} ${focused ? css.focus : ''} ${className ? className : ''}`}>
+        {label && (
+            <label className={css.label} htmlFor={`${name}-field`}>{label}</label>
+        )}
+        <div className={css.input_block}>
+          <input
+            // tslint:disable-next-line: prefer-template
+            id={`${form ? form + '-' : '' }${name}-field`}
+            name={name}
+            type={type}
+            value={value}
+
+            onChange={this.onChange}
+            onFocus={this.focusIn}
+            onBlur={this.focusOut}
+
+            // placeholder={placeholder && placeholder}
+            className={css.input}
+          />
+        </div>
+        <div className="error_block" />
+      </div>
     );
   }
 }

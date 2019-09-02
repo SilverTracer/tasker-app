@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import Auth from '../containers/auth';
+import App from '../components/app';
 
 import { store } from './store';
 
@@ -45,13 +46,23 @@ class Application extends React.Component<any, IState> {
     this.state.subscription && this.state.subscription();
   }
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImNyZWF0ZWRfYXQiOiIyMDE5LTA4LTI2VDEyOjE3OjQ4LjEyN1oiLCJfaWQiOiI1ZDYzY2RlZjVhYmJkZDcyNjFlYzEzMzkiLCJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6Im1hQGlsLnJ1Iiwic2FsdCI6IjAuNzk2OTIxOTA2MzczNzQ3NiIsImhhc2hlZFBhc3N3b3JkIjoiYWY3ZGYxMWNhNjRkNGY2MTIwYzBiYzhhNjFkZDExMTc0YzAxMmY0NiIsIl9fdiI6MH0sImV4cCI6MTU2NzAxMzMyNCwiaWF0IjoxNTY3MDA5NzI0fQ.oylt0nRZYIkZE9EQWKDfRMcn5a4OkzXs0gNxAMLjCJY
-
   render() {
+    const { auth } = this.state;
+
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <Route path="/" component={Auth} />
+          <Switch>
+            {!auth && (
+              <>
+                <Redirect to="/auth" />
+                <Route exact path="/auth" component={Auth} />
+              </>
+            )}
+            <Route exact path="/" component={App} />
+
+            <Redirect exact to="/" />
+          </Switch>
         </BrowserRouter>
       </Provider>
     );

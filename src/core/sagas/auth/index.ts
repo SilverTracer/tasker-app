@@ -1,14 +1,28 @@
 import { Action } from 'redux';
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
+import jwt from 'jwt-decode';
 
 import { TYPES, ACTIONS } from '../../system/user';
+import { signInRequest, signUpRequest } from '../../../utils/api';
 
 function* authSaga(action: TYPES.IAuthUserAction) {
   try {
-    const data = yield action;
+    const data = yield signInRequest.json({ body: JSON.stringify(action.payload) });
 
-    console.log('Auth saga');
+    if (!data.ok) throw data;
+
+    const user : any = jwt(data.body.token);
+
+    const payload : TYPES.IUser = {
+      token: data.body.token,
+      created_at: user.created_at,
+      username: user.username,
+      email: user.email,
+    };
+
+    localStorage.setItem('token', data.body.token);
+    yield put(ACTIONS.setUser(data.body));
   } catch (err) {
     console.error(err);
   }

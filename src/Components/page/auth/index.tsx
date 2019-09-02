@@ -4,7 +4,7 @@ import { Props } from '../../../containers/auth';
 import { Typography } from '../../ui';
 
 import Authorization from './sign_in';
-// import Registration from './reg';
+import Registration from './sign_up';
 import * as css from './main.module.css';
 
 interface IState {
@@ -30,6 +30,7 @@ class AuthPage extends React.Component<Props, IState> {
 
   render() {
     const { activeTab } = this.state;
+    const { authenticate, register } = this.props;
 
     return (
       <div className={css.auth_wrapper}>
@@ -37,7 +38,10 @@ class AuthPage extends React.Component<Props, IState> {
           className={`${css.animation_container} ${ activeTab === 'register' ? css.register : '' }`}
         >
           <div className={css.auth_block}>
-            <Authorization />
+            <Authorization
+              toggle={this.switchTabs}
+              onSubmit={authenticate}
+            />
           </div>
           <div className={css.content_block}>
             <img className={css.bg_image} src={`${process.env.ASSETS_URL}images/auth.jpeg`} alt="Flower on the pretty desc"/>
@@ -51,8 +55,10 @@ class AuthPage extends React.Component<Props, IState> {
             </Typography>
           </div>
           <div className={css.reg_block}>
-            Reg
-            <button onClick={this.switchTabs}>Sign in</button>
+            <Registration
+              toggle={this.switchTabs}
+              onSubmit={register}
+            />
           </div>
         </div>
       </div>
