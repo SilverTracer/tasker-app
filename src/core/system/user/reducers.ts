@@ -2,7 +2,7 @@ import jwt from 'jwt-decode';
 
 import * as TYPES from './types';
 
-const token : string | null = localStorage.getItem('token');
+let token : string | null = localStorage.getItem('token');
 const user : TYPES.IUser = {
   token: '',
   created_at: null,
@@ -11,12 +11,17 @@ const user : TYPES.IUser = {
 };
 
 if (token) {
-  const data : any = jwt<any>(token).data;
+  try {
+    const data : any = jwt<any>(token).data;
 
-  user.created_at = data.created_at;
-  user.username = data.username;
-  user.email = data.email;
-  user.token = token;
+    user.created_at = data.created_at;
+    user.username = data.username;
+    user.email = data.email;
+    user.token = token;
+  } catch {
+    token = '';
+    localStorage.removeItem('token');
+  }
 }
 
 const initialState : TYPES.IUser = {
