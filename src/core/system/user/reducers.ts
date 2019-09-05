@@ -8,6 +8,7 @@ const user : TYPES.IUser = {
   created_at: null,
   username: '',
   email: '',
+  id: '',
 };
 
 if (token) {
@@ -18,6 +19,7 @@ if (token) {
     user.username = data.username;
     user.email = data.email;
     user.token = token;
+    user.id = data._id;
   } catch {
     token = '';
     localStorage.removeItem('token');
@@ -30,6 +32,7 @@ const initialState : TYPES.IUser = {
   created_at: null,
   username: '',
   email: '',
+  id: '',
 };
 
 export default (

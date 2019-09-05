@@ -2,6 +2,7 @@ import { Action } from 'redux';
 
 export interface IUser {
   token: string;
+  id: string;
   created_at: Date | null;
   username: string;
   email: string;

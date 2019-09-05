@@ -19,6 +19,7 @@ function* authSaga(action: TYPES.IAuthUserAction) {
       created_at: user.created_at,
       username: user.username,
       email: user.email,
+      id: user._id,
     };
 
     localStorage.setItem('token', data.body.token);

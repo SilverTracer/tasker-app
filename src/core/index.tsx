@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import Auth from '../containers/auth';
+import Tasks from '../containers/tasks';
 import App from '../components/app';
 
 import { store } from './store';
@@ -59,9 +60,10 @@ class Application extends React.Component<any, IState> {
                 <Route exact path="/auth" component={Auth} />
               </>
             )}
-            <Route exact path="/" component={App} />
 
-            <Redirect exact to="/" />
+            <Route exact path="/tasks" component={Tasks} />
+
+            <Redirect from="/" exact to="/tasks" />
           </Switch>
         </BrowserRouter>
       </Provider>
