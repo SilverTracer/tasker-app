@@ -17,15 +17,32 @@ const tasks = (
         isFetching: true,
       };
     } case TYPES.TASK_GET_SUCCESS: {
+      const { payload } = action as TYPES.IGetTasksSuccess;
+
       return {
         ...state,
-        tasks: action.payload as TYPES.ITask[],
+        tasks: payload,
         isFetching: false,
       };
     } case TYPES.TASK_PUT_SUCCESS: {
+      const { payload } = action as TYPES.IPutTaskSuccess;
+
       return {
         ...state,
-        tasks: [...state.tasks, action.payload as TYPES.ITask],
+        tasks: [...state.tasks, payload],
+        isFetching: false,
+      };
+    } case TYPES.TASK_DELETE_REQUEST: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    } case TYPES.TASK_DELETE_SUCCESS: {
+      const { payload } = action as TYPES.IDeleteTaskSuccess;
+
+      return {
+        ...state,
+        tasks: state.tasks.filter(item => (item.id !== payload.id)),
         isFetching: false,
       };
     }

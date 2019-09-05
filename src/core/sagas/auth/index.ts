@@ -22,8 +22,8 @@ function* authSaga(action: TYPES.IAuthUserAction) {
       id: user._id,
     };
 
-    localStorage.setItem('token', data.body.token);
-    yield put(ACTIONS.setUser(data.body));
+    localStorage.setItem('token', payload.token);
+    yield put(ACTIONS.setUser(payload));
   } catch (err) {
     console.error(err);
   }
@@ -31,9 +31,23 @@ function* authSaga(action: TYPES.IAuthUserAction) {
 
 function* registerSaga(action: TYPES.IRegUserAction) {
   try {
-    const data = yield action;
+    const data = yield signUpRequest.json({
+      body: JSON.stringify(action.payload),
+    });
 
-    console.log('Reg saga');
+    if (!data.ok) throw data;
+
+    const user : any = jwt(data.body.token);
+    const payload : TYPES.IUser = {
+      token: data.body.token,
+      created_at: user.created_at,
+      username: user.username,
+      email: user.email,
+      id: user._id,
+    };
+
+    localStorage.setItem('token', payload.token);
+    yield put(ACTIONS.setUser(payload));
   } catch (err) {
     console.error(err);
   }

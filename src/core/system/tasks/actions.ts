@@ -22,3 +22,13 @@ export const taskPutSuccess = (payload: TYPES.ITask) : TYPES.TaskActionTypes => 
   payload,
   type: TYPES.TASK_PUT_SUCCESS,
 });
+
+export const taskDeleteRequest = (payload: TYPES.IDeleteTask) : TYPES.TaskActionTypes => ({
+  payload,
+  type: TYPES.TASK_DELETE_REQUEST,
+});
+
+export const taskDeleteSuccess = (payload: TYPES.IDeleteTask) : TYPES.TaskActionTypes => ({
+  payload,
+  type: TYPES.TASK_DELETE_SUCCESS,
+});

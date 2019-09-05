@@ -63,7 +63,7 @@ class Application extends React.Component<any, IState> {
 
             <Route exact path="/tasks" component={Tasks} />
 
-            <Redirect from="/" exact to="/tasks" />
+            <Redirect from="/" to="/tasks" />
           </Switch>
         </BrowserRouter>
       </Provider>

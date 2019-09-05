@@ -13,6 +13,7 @@ interface IStateProps {
 interface IDispatchProps {
   getTasks: () => void;
   putTask: (payload: TASKS.TYPES.ICreateTask) => void;
+  deleteTask: (payload: TASKS.TYPES.IDeleteTask) => void;
 }
 
 export type Props = IStateProps & IDispatchProps & RouteProps;
@@ -27,6 +28,9 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: RouteProps) : IDispatc
   },
   putTask: (payload) => {
     dispatch(TASKS.ACTIONS.taskPutRequest(payload));
+  },
+  deleteTask: (payload) => {
+    dispatch(TASKS.ACTIONS.taskDeleteRequest(payload));
   },
 });
 

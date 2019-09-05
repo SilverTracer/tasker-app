@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Props } from '../../../containers/tasks';
+import { Button } from '../../ui';
 
 import Form from './add_form';
 
@@ -17,19 +18,24 @@ class TasksPage extends React.Component<Props> {
     }
   }
 
+  removeTast() {
+  }
+
   mapTasks() {
     const { tasks: { tasks } } = this.props;
 
     return tasks.map(task => (
-      <div>
+      <div key={task.id}>
         <h4>{task.title}</h4>
         <p>{task.description}</p>
+        <Button
+          color="cream"
+          onClick={() => this.props.deleteTask({ id: task.id })}
+        >
+          Delete
+        </Button>
       </div>
     ));
-  }
-
-  putTask() {
-
   }
 
   render() {
