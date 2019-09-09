@@ -3,7 +3,10 @@ import * as React from 'react';
 import {
   Field,
   Button,
+  Typography,
 } from '../../../ui';
+
+import css from './main.module.css';
 
 interface IProps {
   onSubmit: (prop: any) => any;
@@ -53,7 +56,7 @@ class AddForm extends React.Component<IProps> {
 
   render() {
     return (
-      <form id={this.name} onSubmit={this.onSubmit}>
+      <form id={this.name} className={css.form} onSubmit={this.onSubmit}>
         <Field
           type="text"
           required={true}
@@ -68,7 +71,11 @@ class AddForm extends React.Component<IProps> {
           label="Description"
           ref={this.inputs.description}
         />
-        <Button color="sky" type="submit">Put</Button>
+        <div className={css.control_block}>
+          <Button color="ash" type="button" onClick={this.props.callback}>Cancel</Button>
+          <Typography tag="span" color="ash" weight="light" className={css.or_text}>or</Typography>
+          <Button color="sky" type="submit">Create</Button>
+        </div>
       </form>
     );
   }

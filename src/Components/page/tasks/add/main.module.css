@@ -5,4 +5,23 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  overflow: auto;
+}
+
+.form {
+  width: 100%;
+}
+
+.control_block {
+  text-align: center;
+}
+
+.or_text {
+  margin: 0 15px
 }

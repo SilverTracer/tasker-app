@@ -3,6 +3,7 @@ import * as React from 'react';
 import {
   Icon,
   Popover,
+  Tooltip,
 } from '../../../ui';
 
 import Form from './form';
@@ -11,6 +12,7 @@ import * as css from './main.module.css';
 interface IProps {
   className?: string | undefined;
   mountpoint: React.RefObject<HTMLDivElement>;
+  toggle?: () => void;
   onSubmit: (params: any) => void;
 }
 
@@ -19,12 +21,16 @@ interface IState {
 }
 
 class AddTask extends React.Component<IProps, IState> {
+  target : any;
+
   constructor(props : IProps) {
     super(props);
 
     this.state = {
       opened: false,
     };
+
+    this.target = React.createRef();
 
     this.togglePopover = this.togglePopover.bind(this);
     this.renderPopover = this.renderPopover.bind(this);
@@ -62,8 +68,20 @@ class AddTask extends React.Component<IProps, IState> {
   render() {
     return (
       <>
-        <button type="button" className={this.props.className} onClick={this.togglePopover}>
+        <button
+          ref={this.target}
+          type="button"
+          className={this.props.className}
+          onClick={this.togglePopover}
+        >
           <Icon type="Plus" color="black" width={1} />
+          <Tooltip
+            position="bottom"
+            trigger="hover"
+            target={this.target}
+          >
+            Add new task
+          </Tooltip>
         </button>
         {this.renderPopover()}
       </>
