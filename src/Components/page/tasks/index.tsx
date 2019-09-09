@@ -1,17 +1,20 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
 
 import { Props } from '../../../containers/tasks';
-import { Button, Icon, Typography } from '../../ui';
+import { Button, Typography } from '../../ui';
 
 import Sidebar from './sidebar';
 import Header from './header';
-import Form from './add_form';
+import Add from './add';
 import * as css from './main.module.css';
 
 class TasksPage extends React.Component<Props> {
+  mountpoint : React.RefObject<HTMLDivElement>;
+
   constructor(props : Props) {
     super(props);
+
+    this.mountpoint = React.createRef();
   }
 
   componentDidMount() {
@@ -53,13 +56,19 @@ class TasksPage extends React.Component<Props> {
     return (
       <div className={css.layout}>
         <div className={css.content}>
-          <Header />
-          <div className={css.body}>
+          <Header mountpoint={this.mountpoint}>
+            <div className={css.controls}>
+              <Add
+                mountpoint={this.mountpoint}
+                className={css.control_item}
+                onSubmit={this.props.putTask}
+              />
+              {/* Here should be search later */}
+            </div>
+          </Header>
+          <div className={css.body} ref={this.mountpoint}>
             <h3>Tasks</h3>
             {this.mapTasks()}
-            <Form
-              onSubmit={this.props.putTask}
-            />
           </div>
         </div>
         <Sidebar />

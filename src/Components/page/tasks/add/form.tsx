@@ -3,10 +3,11 @@ import * as React from 'react';
 import {
   Field,
   Button,
-} from '../../ui';
+} from '../../../ui';
 
 interface IProps {
   onSubmit: (prop: any) => any;
+  callback?: () => any;
 }
 
 class AddForm extends React.Component<IProps> {
@@ -46,6 +47,7 @@ class AddForm extends React.Component<IProps> {
 
     if (valid) {
       this.props.onSubmit(payload);
+      if (this.props.callback) this.props.callback();
     } else console.log('not submit');
   }
 
