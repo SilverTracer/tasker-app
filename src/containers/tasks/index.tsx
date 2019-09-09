@@ -14,6 +14,7 @@ interface IDispatchProps {
   getTasks: () => void;
   putTask: (payload: TASKS.TYPES.ICreateTask) => void;
   deleteTask: (payload: TASKS.TYPES.IDeleteTask) => void;
+  toggleTask: (payload: TASKS.TYPES.IToggleTask) => void;
 }
 
 export type Props = IStateProps & IDispatchProps & RouteProps;
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: RouteProps) : IDispatc
   },
   deleteTask: (payload) => {
     dispatch(TASKS.ACTIONS.taskDeleteRequest(payload));
+  },
+  toggleTask: (payload) => {
+    dispatch(TASKS.ACTIONS.taskToggleRequest(payload));
   },
 });
 

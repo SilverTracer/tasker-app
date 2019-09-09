@@ -32,3 +32,13 @@ export const taskDeleteSuccess = (payload: TYPES.IDeleteTask) : TYPES.TaskAction
   payload,
   type: TYPES.TASK_DELETE_SUCCESS,
 });
+
+export const taskToggleRequest = (payload: TYPES.IToggleTask) : TYPES.TaskActionTypes => ({
+  payload,
+  type: TYPES.TASK_TOGGLE_REQUEST,
+});
+
+export const taskToggleSuccess = (payload: TYPES.IToggleTask) : TYPES.TaskActionTypes => ({
+  payload,
+  type: TYPES.TASK_TOGGLE_SUCCESS,
+});

@@ -1,5 +1,11 @@
 import { Action } from 'redux';
 
+// Helper data shapes
+export interface IStatus {
+  completed: boolean;
+}
+
+// Main data shapes
 export interface ICreateTask {
   title: string;
   description: string;
@@ -9,8 +15,14 @@ export interface IDeleteTask {
   id: string;
 }
 
+export interface IToggleTask {
+  id: string;
+  completed: boolean;
+}
+
 export interface ITask extends ICreateTask {
   id: string;
+  status: IStatus;
 }
 
 export interface ITasks {
@@ -21,34 +33,22 @@ export interface ITasks {
 export const TASK_GET_REQUEST = 'TASK_GET_REQUEST';
 export const TASK_PUT_REQUEST = 'TASK_CREATE_REQUEST';
 export const TASK_DELETE_REQUEST = 'TASK_DELETE_REQUEST';
+export const TASK_TOGGLE_REQUEST = 'TASK_TOGGLE_REQUEST';
 
 export const TASK_GET_SUCCESS = 'TASK_GET_SUCCESS';
 export const TASK_PUT_SUCCESS = 'TASK_PUT_SUCCESS';
 export const TASK_DELETE_SUCCESS = 'TASK_DELETE_SUCCESS';
+export const TASK_TOGGLE_SUCCESS = 'TASK_TOGGLE_SUCCESS';
 
-export interface IPutTaskAction extends Action<string> {
-  payload: ICreateTask;
-}
-
-export interface IDeleteTaskAction extends Action<string> {
-  payload: IDeleteTask;
-}
-
-export interface IGetTasksSuccess extends Action<string> {
-  payload: ITask[];
-}
-
-export interface IPutTaskSuccess extends Action<string> {
-  payload: ITask;
-}
-
-export interface IDeleteTaskSuccess extends Action<string> {
-  payload: IDeleteTask;
+export interface ITaskAction<T> extends Action<string> {
+  payload: T;
 }
 
 export type TaskActionTypes =
-  IGetTasksSuccess |
-  IPutTaskAction |
-  IPutTaskSuccess |
-  IDeleteTaskAction |
-  IDeleteTaskSuccess;
+  ITaskAction<
+      ICreateTask |
+      ITask |
+      ITask[] |
+      IDeleteTask |
+      IToggleTask
+  >;

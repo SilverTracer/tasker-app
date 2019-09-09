@@ -3,6 +3,7 @@ node_modules/
 
 # Ignoring build
 # dist/
+dist/bundle.js
 
 # Ignoring enviroment variables files
 .env

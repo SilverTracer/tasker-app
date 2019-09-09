@@ -25,6 +25,7 @@
 
 .control_item {
   height: 100%;
+  background: transparent;
   border-left: 1px solid var(--white_2);
   display: flex;
   flex-wrap: wrap;

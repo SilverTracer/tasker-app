@@ -8,7 +8,7 @@ import * as css from './main.module.css';
 const Sidebar : React.FC<{}> = () => {
   return (
     <div className={css.sidebar}>
-        <img className={css.bg_image} src="http://localhost:8080/assets/images/auth.jpeg" alt="Sidebar image"/>
+        <img className={css.bg_image} src={`${process.env.ASSETS_URL}images/auth.jpeg`} alt="Sidebar image"/>
         <div className={css.user}>
           <Typography tag="h3" color="white_2" weight="light">User Name</Typography>
           <Typography tag="p" color="ash_2" className={css.contact}>e-mail@mail.ru</Typography>

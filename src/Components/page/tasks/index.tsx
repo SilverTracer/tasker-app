@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { Props } from '../../../containers/tasks';
-import { Button, Icon } from '../../ui';
+import { Button, Icon, Typography } from '../../ui';
 
 import Sidebar from './sidebar';
 import Header from './header';
@@ -31,12 +31,19 @@ class TasksPage extends React.Component<Props> {
     return tasks.map(task => (
       <div key={task.id}>
         <h4>{task.title}</h4>
-        <p>{task.description}</p>
+        <p>{task.description}, completed = {task.status.completed.toString()}</p>
         <Button
           color="cream"
           onClick={() => this.props.deleteTask({ id: task.id })}
         >
           Delete
+        </Button>
+        <Typography tag="span" color="ash" weight="light">or</Typography>
+        <Button
+          color="sky"
+          onClick={() => this.props.toggleTask({ id: task.id, completed: !task.status.completed })}
+        >
+          Complete
         </Button>
       </div>
     ));

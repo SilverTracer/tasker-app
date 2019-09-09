@@ -5,6 +5,7 @@
   position: relative;
   cursor: pointer;
   background-color: #fff;
+  margin-bottom: 10px;
 }
 
 .button:after {

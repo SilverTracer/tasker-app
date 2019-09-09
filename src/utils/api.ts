@@ -36,3 +36,10 @@ export const taskDeleteRequest = new API<{}>(
   'application/json',
   10000,
 );
+
+export const taskCompletionToggle = new API<{}>(
+  'POST',
+  `${process.env.API_URL}/api/tasks/{id}`,
+  'application/json',
+  10000,
+);

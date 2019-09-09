@@ -1,6 +1,5 @@
 import { SagaIterator } from 'redux-saga';
 import { takeLatest, select, put } from 'redux-saga/effects';
-import { Action } from 'redux';
 
 import * as API from '../../../utils/api';
 import { TYPES, ACTIONS } from '../../system/tasks';
@@ -27,7 +26,7 @@ function* tasksGet() {
   }
 }
 
-function* taskPut(action: TYPES.IPutTaskAction) {
+function* taskPut(action: TYPES.ITaskAction<TYPES.ICreateTask>) {
   const token = yield getToken();
 
   try {
@@ -47,7 +46,7 @@ function* taskPut(action: TYPES.IPutTaskAction) {
   yield null;
 }
 
-function* taskDelete(action: TYPES.IDeleteTaskAction) {
+function* taskDelete(action: TYPES.ITaskAction<TYPES.IDeleteTask>) {
   const token = yield getToken();
 
   try {
@@ -66,8 +65,31 @@ function* taskDelete(action: TYPES.IDeleteTaskAction) {
   }
 }
 
+function* taskToggle(action: TYPES.ITaskAction<TYPES.IToggleTask>) {
+  const token = yield getToken();
+
+  const { id, completed } = action.payload;
+
+  try {
+    const response = yield API.taskCompletionToggle.json({
+      token,
+      query: {
+        id,
+      },
+      body: JSON.stringify({ completed }),
+    });
+
+    if (!response.ok) throw new Error(`Response is not ok... Status is ${response.status}`);
+
+    yield put(ACTIONS.taskToggleSuccess({ id, completed }));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export default function* tasksSaga() : SagaIterator {
   yield takeLatest(TYPES.TASK_GET_REQUEST, tasksGet);
   yield takeLatest(TYPES.TASK_PUT_REQUEST, taskPut);
   yield takeLatest(TYPES.TASK_DELETE_REQUEST, taskDelete);
+  yield takeLatest(TYPES.TASK_TOGGLE_REQUEST, taskToggle);
 }
