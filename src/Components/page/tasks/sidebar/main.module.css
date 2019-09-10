@@ -1,7 +1,7 @@
 /* Sidebar styles */
 .sidebar {
-  flex-basis: 300px;
-  width: 300px;
+  flex: 0 0 300px;
+  min-width: 300px;
   position: relative;
   overflow: hidden;
   padding: 0 30px;

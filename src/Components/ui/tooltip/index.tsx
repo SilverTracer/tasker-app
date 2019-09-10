@@ -6,43 +6,120 @@ interface IProps {
   position: 'top' | 'bottom' | 'left' | 'right';
   trigger: 'click' | 'focus' | 'hover';
   target: any;
+  text: string;
 }
 
-class Tooltip extends React.Component<IProps> {
+interface IState {
+  shown: boolean;
+}
+
+class Tooltip extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
+
+    this.state = {
+      shown: false,
+    };
+
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.setEventListenes = this.setEventListenes.bind(this);
+    this.removeEventListeners = this.removeEventListeners.bind(this);
+
+    this.classNames = this.classNames.bind(this);
+  }
+
+  componentDidMount() {
+    console.log(this.props.target);
   }
 
   componentDidUpdate(prevProps: IProps) {
     const { target } = this.props;
 
-    if (!prevProps.target.current && target.current) {
-      console.log(target.current);
-      target.current && target.current.addEventListener('mouseenter', this.toggle);
-      target.current && target.current.addEventListener('mouseleave', this.toggle);
+    if (!prevProps.target && target) {
+      this.setEventListenes();
     }
   }
 
   componentWillUnmount() {
-    // Remove listeners
-    const { target } = this.props;
+    this.removeEventListeners();
+  }
 
-    console.log(target.current);
+  setEventListenes() {
+    const { trigger, target } = this.props;
 
-    target.current && target.current.removeEventListener('mouseenter', this.toggle);
-    target.current && target.current.removeEventListener('mouseleave', this.toggle);
+    switch (trigger) {
+      case 'hover': {
+        target.addEventListener('mouseenter', this.open);
+        target.addEventListener('mouseleave', this.close);
+        break;
+      } case 'focus': {
+        target.addEventListener('focus', this.open);
+        target.addEventListener('blur', this.close);
+        break;
+      } case 'click': {
+        target.addEventListener('click', this.toggle);
+        break;
+      }
+      default: return null;
+    }
+  }
+
+  removeEventListeners() {
+    const { trigger, target } = this.props;
+
+    switch (trigger) {
+      case 'hover': {
+        target.removeEventListener('mouseenter', this.open);
+        target.removeEventListener('mouseleave', this.close);
+        break;
+      } case 'focus': {
+        target.removeEventListener('focus', this.open);
+        target.removeEventListener('blur', this.close);
+        break;
+      } case 'click': {
+        target.removeEventListener('click', this.toggle);
+        break;
+      }
+      default: return null;
+    }
+  }
+
+  classNames() {
+    const classNames = [];
+
+    classNames.push(css.wrapper);
+
+    if (this.state.shown) classNames.push(css.shown);
+
+    classNames.push(css[this.props.position]);
+
+    return classNames.join(' ');
+  }
+
+  open() {
+    this.setState({ shown: true });
+  }
+
+  close() {
+    this.setState({ shown: false });
   }
 
   toggle() {
-    const { target } = this.props;
+    const { shown } = this.state;
 
-    console.log(target);
-    console.log('Kakogo besa?');
+    this.setState({ shown: !shown });
   }
 
   render() {
     return (
-      <div className={css.wrapper}>Tooltip</div>
+      <div className={this.classNames()}>
+        <span className={css.arrow}></span>
+        <p className={css.content}>
+          {this.props.text}
+        </p>
+      </div>
     );
   }
 }

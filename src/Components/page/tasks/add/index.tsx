@@ -4,6 +4,7 @@ import {
   Icon,
   Popover,
   Tooltip,
+  Typography,
 } from '../../../ui';
 
 import Form from './form';
@@ -56,10 +57,13 @@ class AddTask extends React.Component<IProps, IState> {
         opened={opened}
       >
         <div className={css.overlay}>
-            <Form
-              onSubmit={this.props.onSubmit}
-              callback={this.togglePopover}
-            />
+          <Typography tag="h3" weight="light" color="black_2" className={css.popover_title}>
+            Create new task
+          </Typography>
+          <Form
+            onSubmit={this.props.onSubmit}
+            callback={this.togglePopover}
+          />
         </div>
       </Popover>
     );
@@ -78,10 +82,9 @@ class AddTask extends React.Component<IProps, IState> {
           <Tooltip
             position="bottom"
             trigger="hover"
-            target={this.target}
-          >
-            Add new task
-          </Tooltip>
+            target={this.target.current}
+            text="Add new task"
+          />
         </button>
         {this.renderPopover()}
       </>

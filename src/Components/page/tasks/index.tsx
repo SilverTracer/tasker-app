@@ -6,6 +6,7 @@ import { Button, Typography } from '../../ui';
 import Sidebar from './sidebar';
 import Header from './header';
 import Add from './add';
+import Task from './task';
 import * as css from './main.module.css';
 
 class TasksPage extends React.Component<Props> {
@@ -31,24 +32,15 @@ class TasksPage extends React.Component<Props> {
   mapTasks() {
     const { tasks: { tasks } } = this.props;
 
-    return tasks.map(task => (
-      <div key={task.id}>
-        <h4>{task.title}</h4>
-        <p>{task.description}, completed = {task.status.completed.toString()}</p>
-        <Button
-          color="cream"
-          onClick={() => this.props.deleteTask({ id: task.id })}
-        >
-          Delete
-        </Button>
-        <Typography tag="span" color="ash" weight="light">or</Typography>
-        <Button
-          color="sky"
-          onClick={() => this.props.toggleTask({ id: task.id, completed: !task.status.completed })}
-        >
-          Complete
-        </Button>
-      </div>
+    return tasks.map(task => ( 
+      <Task
+        id={task.id}
+        title={task.title}
+        description={task.description}
+        status={task.status}
+        delete={() => this.props.deleteTask({ id: task.id })}
+        toggle={() => this.props.toggleTask({ id: task.id, completed: !task.status.completed })}
+      />
     ));
   }
 
@@ -67,8 +59,12 @@ class TasksPage extends React.Component<Props> {
             </div>
           </Header>
           <div className={css.body} ref={this.mountpoint}>
-            <h3>Tasks</h3>
-            {this.mapTasks()}
+            <Typography tag="h3" color="black_2" weight="light" className={css.page_title}>
+              Task list
+            </Typography>
+            <div  className={css.tasks_wrapper}>
+              {this.mapTasks()}
+            </div>
           </div>
         </div>
         <Sidebar />

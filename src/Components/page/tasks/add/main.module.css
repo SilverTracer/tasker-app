@@ -12,6 +12,8 @@
   justify-content: center;
   padding: 60px;
   overflow: auto;
+
+  flex-direction: column;
 }
 
 .form {
@@ -24,4 +26,9 @@
 
 .or_text {
   margin: 0 15px
+}
+
+.popover_title {
+  text-transform: uppercase;
+  margin-bottom: 60px;
 }
