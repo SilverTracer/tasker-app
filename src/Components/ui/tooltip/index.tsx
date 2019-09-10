@@ -30,10 +30,6 @@ class Tooltip extends React.Component<IProps, IState> {
     this.classNames = this.classNames.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.target);
-  }
-
   componentDidUpdate(prevProps: IProps) {
     const { target } = this.props;
 

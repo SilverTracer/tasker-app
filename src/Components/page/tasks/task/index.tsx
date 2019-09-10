@@ -2,10 +2,12 @@ import * as React from 'react';
 
 import { Button, Typography } from '../../../ui';
 import { ITask } from '../../../../core/system/tasks/types';
+import Remove from '../remove';
 
 import * as css from './main.module.css';
 
 interface IProps extends ITask {
+  mountpoint: React.RefObject<HTMLDivElement>;
   toggle: () => void;
   delete: () => void;
 }
@@ -22,14 +24,10 @@ const Task : React.FC<IProps> = (props) => {
         </Typography>
       </div>
       <div className={css.controls}>
-        <Button
-          color="black_2"
-          size="small"
-          fill="blank"
-          onClick={props.delete}
-        >
-          Delete
-        </Button>
+        <Remove
+          mountpoint={props.mountpoint}
+          delete={props.delete}
+        />
         <Typography tag="span" color="ash" weight="light" className={css.or_text}>or</Typography>
         <Button
           color="sky"

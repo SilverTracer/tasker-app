@@ -34,6 +34,7 @@ class TasksPage extends React.Component<Props> {
 
     return tasks.map(task => (
       <Task
+        mountpoint={this.mountpoint}
         key={task.id}
         id={task.id}
         title={task.title}
