@@ -55,6 +55,7 @@ class AddTask extends React.Component<IProps, IState> {
       <Popover
         mountpoint={mountpoint}
         opened={opened}
+        closeHandler={this.togglePopover}
       >
         <div className={css.overlay}>
           <Typography tag="h3" weight="light" color="black_2" className={css.popover_title}>

@@ -69,20 +69,22 @@ class Tooltip extends React.Component<IProps, IState> {
   removeEventListeners() {
     const { trigger, target } = this.props;
 
-    switch (trigger) {
-      case 'hover': {
-        target.removeEventListener('mouseenter', this.open);
-        target.removeEventListener('mouseleave', this.close);
-        break;
-      } case 'focus': {
-        target.removeEventListener('focus', this.open);
-        target.removeEventListener('blur', this.close);
-        break;
-      } case 'click': {
-        target.removeEventListener('click', this.toggle);
-        break;
+    if (target) {
+      switch (trigger) {
+        case 'hover': {
+          target.removeEventListener('mouseenter', this.open);
+          target.removeEventListener('mouseleave', this.close);
+          break;
+        } case 'focus': {
+          target.removeEventListener('focus', this.open);
+          target.removeEventListener('blur', this.close);
+          break;
+        } case 'click': {
+          target.removeEventListener('click', this.toggle);
+          break;
+        }
+        default: return null;
       }
-      default: return null;
     }
   }
 

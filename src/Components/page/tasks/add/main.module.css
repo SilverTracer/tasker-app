@@ -18,10 +18,12 @@
 
 .form {
   width: 100%;
+  max-width: 500px;
 }
 
 .control_block {
   text-align: center;
+  margin-top: 60px;
 }
 
 .or_text {

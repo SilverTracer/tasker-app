@@ -5,6 +5,9 @@ node_modules/
 # dist/
 dist/bundle.js
 
+# Ignoring cache
+.firebase/
+
 # Ignoring enviroment variables files
 .env
 .env.local

@@ -32,8 +32,9 @@ class TasksPage extends React.Component<Props> {
   mapTasks() {
     const { tasks: { tasks } } = this.props;
 
-    return tasks.map(task => ( 
+    return tasks.map(task => (
       <Task
+        key={task.id}
         id={task.id}
         title={task.title}
         description={task.description}
