@@ -61,11 +61,13 @@ class TasksPage extends React.Component<Props> {
             </div>
           </Header>
           <div className={css.body} ref={this.mountpoint}>
-            <Typography tag="h3" color="black_2" weight="light" className={css.page_title}>
-              Task list
-            </Typography>
-            <div  className={css.tasks_wrapper}>
-              {this.mapTasks()}
+            <div className={css.content_wrapper}>
+              <Typography tag="h3" color="black_2" weight="light" className={css.page_title}>
+                Task list
+              </Typography>
+              <div  className={css.tasks_wrapper}>
+                {this.mapTasks()}
+              </div>
             </div>
           </div>
         </div>

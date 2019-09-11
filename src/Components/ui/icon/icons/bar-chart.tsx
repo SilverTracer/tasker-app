@@ -15,7 +15,7 @@ const BarChart : React.FC<IIcon> = props => (
     strokeWidth={props.width || 2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={css[props.color]}
+    className={`${css[props.color]} ${props.className ? props.className : ''}`}
   >
     <line x1="12" y1="20" x2="12" y2="10"/>
     <line x1="18" y1="20" x2="18" y2="4"/>

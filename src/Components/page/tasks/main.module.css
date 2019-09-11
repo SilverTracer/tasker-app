@@ -46,3 +46,8 @@
 .tasks_wrapper {
   padding: 0 30px;
 }
+
+.content_wrapper {
+  max-width: 800px;
+  margin: auto;
+}

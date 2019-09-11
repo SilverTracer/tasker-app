@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Typography } from '../../../ui';
+import { Button, Typography, Icon } from '../../../ui';
 import { ITask } from '../../../../core/system/tasks/types';
 import Remove from '../remove';
 
@@ -15,6 +15,16 @@ interface IProps extends ITask {
 const Task : React.FC<IProps> = (props) => {
   return (
     <div className={css.wrapper}>
+      <div className={css.complete}>
+        <button type="button" onClick={props.toggle}>
+          <Icon
+            className={css.edit_icon}
+            type="EditSquare"
+            color="ash"
+            width={1}
+          />
+        </button>
+      </div>
       <div className={css.text}>
         <Typography tag="h4" weight="regular" color="black_2" className={css.title}>
           {props.title}

@@ -15,7 +15,7 @@ const Plus : React.FC<IIcon> = props => (
     strokeWidth={props.width || 2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={css[props.color]}
+    className={`${css[props.color]} ${props.className ? props.className : ''}`}
   >
     <circle cx="11" cy="11" r="8"/>
     <line x1="21" y1="21" x2="16.65" y2="16.65"/>

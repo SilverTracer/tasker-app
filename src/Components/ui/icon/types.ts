@@ -4,6 +4,7 @@ export interface IIcon {
   color: Color;
   width?: number;
   size?: number;
+  className?: string;
 }
 
 export interface IIcons extends IIcon {
@@ -12,5 +13,11 @@ export interface IIcons extends IIcon {
     'Plus' |
     'PlusCircle' |
     'Search' |
-    'BarChart';
+    'BarChart' |
+    'EditSquare' |
+    'Edit' |
+    'Cross' |
+    'Delete' |
+    'Trash' |
+    'TrashTwo';
 }

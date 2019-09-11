@@ -15,7 +15,7 @@ const Delete : React.FC<IIcon> = props => (
     strokeWidth={props.width || 2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={css[props.color]}
+    className={`${css[props.color]} ${props.className ? props.className : ''}`}
   >
     <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/>
     <line x1="18" y1="9" x2="12" y2="15"/>
