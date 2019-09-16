@@ -1,8 +1,10 @@
 import { SagaIterator } from 'redux-saga';
 import { takeLatest, select, put } from 'redux-saga/effects';
 
-import * as API from '../../../utils/api';
+import { Tasks } from '../../../utils/api';
 import { TYPES, ACTIONS } from '../../system/tasks';
+
+const API = Tasks;
 
 function* getToken() : SagaIterator {
   const store = yield select();
@@ -26,7 +28,7 @@ function* tasksGet() {
   }
 }
 
-function* taskPut(action: TYPES.ITaskAction<TYPES.ICreateTask>) {
+function* taskPut(action: TYPES.ITaskAction<TYPES.ITaskBody>) {
   const token = yield getToken();
 
   try {
@@ -71,7 +73,7 @@ function* taskToggle(action: TYPES.ITaskAction<TYPES.IToggleTask>) {
   const { id, completed } = action.payload;
 
   try {
-    const response = yield API.taskCompletionToggle.json({
+    const response = yield API.taskPostRequest.json({
       token,
       query: {
         id,
@@ -87,9 +89,32 @@ function* taskToggle(action: TYPES.ITaskAction<TYPES.IToggleTask>) {
   }
 }
 
+function* taskPost(action: TYPES.ITaskAction<TYPES.ITask>) {
+  const token = yield getToken();
+
+  const { id, title, description } = action.payload;
+
+  try {
+    const response = yield API.taskPostRequest.json({
+      token,
+      query: {
+        id,
+      },
+      body: JSON.stringify({ title, description }),
+    });
+
+    if (!response.ok) throw new Error(`Response is not ok... Status is ${response.status}`);
+
+    yield put(ACTIONS.taskEditSuccess(action.payload));
+  } catch (err) {
+    yield console.error(err);
+  }
+}
+
 export default function* tasksSaga() : SagaIterator {
   yield takeLatest(TYPES.TASK_GET_REQUEST, tasksGet);
   yield takeLatest(TYPES.TASK_PUT_REQUEST, taskPut);
   yield takeLatest(TYPES.TASK_DELETE_REQUEST, taskDelete);
   yield takeLatest(TYPES.TASK_TOGGLE_REQUEST, taskToggle);
+  yield takeLatest(TYPES.TASK_EDIT_REQUEST, taskPost);
 }

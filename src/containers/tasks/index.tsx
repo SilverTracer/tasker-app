@@ -12,7 +12,7 @@ interface IStateProps {
 
 interface IDispatchProps {
   getTasks: () => void;
-  putTask: (payload: TASKS.TYPES.ICreateTask) => void;
+  putTask: (payload: TASKS.TYPES.ITaskBody) => void;
   deleteTask: (payload: TASKS.TYPES.IDeleteTask) => void;
   toggleTask: (payload: TASKS.TYPES.IToggleTask) => void;
 }

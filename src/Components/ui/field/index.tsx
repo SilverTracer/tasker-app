@@ -29,7 +29,7 @@ class Field extends React.Component<IProps, IState> {
 
     this.state = {
       valid: this.props.required ? false : true,
-      focused: false,
+      focused: !!props.value || false,
       value: this.props.value || '',
     };
 

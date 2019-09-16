@@ -12,6 +12,7 @@ const tasks = (
   switch (action.type) {
     case TYPES.TASK_GET_REQUEST:
     case TYPES.TASK_TOGGLE_REQUEST:
+    case TYPES.TASK_EDIT_REQUEST:
     case TYPES.TASK_PUT_REQUEST: {
       return {
         ...state,
@@ -31,6 +32,23 @@ const tasks = (
       return {
         ...state,
         tasks: [...state.tasks, payload],
+        isFetching: false,
+      };
+    } case TYPES.TASK_EDIT_SUCCESS: {
+      const { payload } = action as TYPES.ITaskAction<TYPES.ITask>;
+      let newTasks = state.tasks.slice();
+
+      newTasks = newTasks.map((item) => {
+        if (item.id === payload.id) {
+          return payload;
+        }
+
+        return item;
+      });
+
+      return {
+        ...state,
+        tasks: [...newTasks],
         isFetching: false,
       };
     } case TYPES.TASK_DELETE_REQUEST: {

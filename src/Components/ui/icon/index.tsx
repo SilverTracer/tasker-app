@@ -14,6 +14,7 @@ class Icon extends React.Component<TYPES.IIcons> {
       color,
       width,
       size,
+      className,
     } = this.props;
 
     if (!ICONS[type]) return null;
@@ -22,6 +23,7 @@ class Icon extends React.Component<TYPES.IIcons> {
       color,
       width,
       size,
+      className,
     };
 
     return <Component {...props} />;

@@ -4,11 +4,11 @@ import { SagaIterator } from 'redux-saga';
 import jwt from 'jwt-decode';
 
 import { TYPES, ACTIONS } from '../../system/user';
-import { signInRequest, signUpRequest } from '../../../utils/api';
+import { Auth } from '../../../utils/api';
 
 function* authSaga(action: TYPES.IAuthUserAction) {
   try {
-    const data = yield signInRequest.json({ body: JSON.stringify(action.payload) });
+    const data = yield Auth.signInRequest.json({ body: JSON.stringify(action.payload) });
 
     if (!data.ok) throw data;
 
@@ -31,7 +31,7 @@ function* authSaga(action: TYPES.IAuthUserAction) {
 
 function* registerSaga(action: TYPES.IRegUserAction) {
   try {
-    const data = yield signUpRequest.json({
+    const data = yield Auth.signUpRequest.json({
       body: JSON.stringify(action.payload),
     });
 
