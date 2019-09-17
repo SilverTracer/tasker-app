@@ -11,6 +11,7 @@ interface IProps extends ITask {
   mountpoint: React.RefObject<HTMLDivElement>;
   toggle: () => void;
   delete: () => void;
+  edit: (params: any) => void;
 }
 
 const Task : React.FC<IProps> = (props) => {
@@ -21,9 +22,10 @@ const Task : React.FC<IProps> = (props) => {
           initValue={{
             title: props.title,
             description: props.description,
+            id: props.id,
           }}
           mountpoint={props.mountpoint}
-          onSubmit={props.toggle}
+          onSubmit={props.edit}
         />
       </div>
       <div className={css.text}>

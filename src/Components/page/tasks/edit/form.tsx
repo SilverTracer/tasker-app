@@ -5,12 +5,12 @@ import {
   Button,
   Typography,
 } from '../../../ui';
-import { ITaskBody } from '../../../../core/system/tasks/types';
+import { IEditTask } from '../../../../core/system/tasks/types';
 
 import * as css from './main.module.css';
 
 interface IProps {
-  initValue: ITaskBody;
+  initValue: IEditTask;
   onSubmit: (prop: any) => any;
   callback?: () => any;
 }
@@ -25,6 +25,7 @@ class AddForm extends React.Component<IProps> {
     this.inputs = {
       title: React.createRef(),
       description: React.createRef(),
+      id: React.createRef(),
     };
 
     this.name = 'task_add';
@@ -59,6 +60,13 @@ class AddForm extends React.Component<IProps> {
   render() {
     return (
       <form id={this.name} className={css.form} onSubmit={this.onSubmit}>
+        <Field
+          type="hidden"
+          required={true}
+          name="id"
+          ref={this.inputs.id}
+          value={this.props.initValue.id}
+        />
         <Field
           type="text"
           required={true}

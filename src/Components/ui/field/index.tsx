@@ -3,7 +3,7 @@ import * as React from 'react';
 import css from './main.module.css';
 
 interface IProps {
-  type: 'text' | 'password' | 'number';
+  type: 'text' | 'password' | 'number' | 'hidden';
   required: boolean;
   name: string;
 
@@ -28,7 +28,7 @@ class Field extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      valid: this.props.required ? false : true,
+      valid: this.props.required ? !!this.props.value : true,
       focused: !!props.value || false,
       value: this.props.value || '',
     };
@@ -37,6 +37,9 @@ class Field extends React.Component<IProps, IState> {
     this.focusIn = this.focusIn.bind(this);
     this.focusOut = this.focusOut.bind(this);
     this.onChange = this.onChange.bind(this);
+
+    this.generateInput = this.generateInput.bind(this);
+    this.generateWrapper = this.generateWrapper.bind(this);
   }
 
   componentDidUpdate(prevProps: IProps, prevState: IState) {
@@ -72,34 +75,57 @@ class Field extends React.Component<IProps, IState> {
     onChange && onChange(e);
   }
 
-  render() {
-    const { type, name, label, placeholder, className, form } = this.props;
-    const { value, focused } = this.state;
+  generateInput() {
+    const { type, name, placeholder, form } = this.props;
+    const { value } = this.state;
 
     return (
-      <div className={`${css.field_wrapper} ${focused ? css.focus : ''} ${className ? className : ''}`}>
-        {label && (
-            <label className={css.label} htmlFor={`${name}-field`}>{label}</label>
-        )}
-        <div className={css.input_block}>
-          <input
-            // tslint:disable-next-line: prefer-template
-            id={`${form ? form + '-' : '' }${name}-field`}
-            name={name}
-            type={type}
-            value={value}
+      <input
+        // tslint:disable-next-line: prefer-template
+        id={`${form ? form + '-' : '' }${name}-field`}
+        name={name}
+        type={type}
+        value={value}
+        placeholder={placeholder}
 
-            onChange={this.onChange}
-            onFocus={this.focusIn}
-            onBlur={this.focusOut}
+        onChange={this.onChange}
+        onFocus={this.focusIn}
+        onBlur={this.focusOut}
 
-            // placeholder={placeholder && placeholder}
-            className={css.input}
-          />
-        </div>
-        <div className="error_block" />
-      </div>
+        className={css.input}
+      />
     );
+  }
+
+  generateWrapper(inner : React.InputHTMLAttributes<HTMLInputElement>) {
+    const { type, name, label, className } = this.props;
+    const { focused } = this.state;
+
+    let wrapper = (
+      <>
+        {inner}
+      </>
+    );
+
+    if (type !== 'hidden') {
+      wrapper = (
+        <div className={`${css.field_wrapper} ${focused ? css.focus : ''} ${className ? className : ''}`}>
+          {label && (
+              <label className={css.label} htmlFor={`${name}-field`}>{label}</label>
+          )}
+          <div className={css.input_block}>
+            {inner}
+          </div>
+          <div className="error_block" />
+        </div>
+      );
+    }
+
+    return wrapper;
+  }
+
+  render() {
+    return this.generateWrapper(this.generateInput());
   }
 }
 

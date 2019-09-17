@@ -89,7 +89,7 @@ function* taskToggle(action: TYPES.ITaskAction<TYPES.IToggleTask>) {
   }
 }
 
-function* taskPost(action: TYPES.ITaskAction<TYPES.ITask>) {
+function* taskPost(action: TYPES.ITaskAction<TYPES.IEditTask>) {
   const token = yield getToken();
 
   const { id, title, description } = action.payload;
@@ -105,7 +105,7 @@ function* taskPost(action: TYPES.ITaskAction<TYPES.ITask>) {
 
     if (!response.ok) throw new Error(`Response is not ok... Status is ${response.status}`);
 
-    yield put(ACTIONS.taskEditSuccess(action.payload));
+    yield put(ACTIONS.taskEditSuccess({ ...response.body }));
   } catch (err) {
     yield console.error(err);
   }

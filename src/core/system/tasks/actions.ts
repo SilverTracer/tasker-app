@@ -46,7 +46,7 @@ export const taskToggleSuccess = (payload: TYPES.IToggleTask) : TYPES.TaskAction
 });
 
 // Post request actions
-export const taskEditRequest = (payload: TYPES.ITask) : TYPES.TaskActionTypes => ({
+export const taskEditRequest = (payload: TYPES.IEditTask) : TYPES.TaskActionTypes => ({
   payload,
   type: TYPES.TASK_EDIT_REQUEST,
 });

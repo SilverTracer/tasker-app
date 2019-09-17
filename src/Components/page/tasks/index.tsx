@@ -42,6 +42,7 @@ class TasksPage extends React.Component<Props> {
         status={task.status}
         delete={() => this.props.deleteTask({ id: task.id })}
         toggle={() => this.props.toggleTask({ id: task.id, completed: !task.status.completed })}
+        edit={this.props.editTask}
       />
     ));
   }

@@ -6,13 +6,13 @@ import {
   Tooltip,
   Typography,
 } from '../../../ui';
-import { ITaskBody } from '../../../../core/system/tasks/types';
+import { IEditTask } from '../../../../core/system/tasks/types';
 
 import Form from './form';
 import * as css from './main.module.css';
 
 interface IProps {
-  initValue: ITaskBody;
+  initValue: IEditTask;
   className?: string | undefined;
   mountpoint: React.RefObject<HTMLDivElement>;
   toggle?: () => void;

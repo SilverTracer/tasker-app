@@ -15,6 +15,10 @@ export interface IDeleteTask {
   id: string;
 }
 
+export interface IEditTask extends ITaskBody {
+  id: string;
+}
+
 export interface IToggleTask {
   id: string;
   completed: boolean;
@@ -52,5 +56,6 @@ export type TaskActionTypes =
       ITask |
       ITask[] |
       IDeleteTask |
-      IToggleTask
+      IToggleTask |
+      IEditTask
   >;
