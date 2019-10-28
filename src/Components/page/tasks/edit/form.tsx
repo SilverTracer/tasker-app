@@ -86,7 +86,7 @@ class AddForm extends React.Component<IProps> {
         <div className={css.control_block}>
           <Button color="ash" type="button" onClick={this.props.callback}>Cancel</Button>
           <Typography tag="span" color="ash" weight="light" className={css.or_text}>or</Typography>
-          <Button color="sky" type="submit">Create</Button>
+          <Button color="sky" type="submit">Update</Button>
         </div>
       </form>
     );
