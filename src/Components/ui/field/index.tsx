@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import css from './main.module.css';
 
-interface IProps {
+interface IProps extends React.HTMLAttributes<HTMLInputElement> {
   type: 'text' | 'password' | 'number' | 'hidden';
   required: boolean;
   name: string;
@@ -10,7 +10,6 @@ interface IProps {
   validation?: string[];
   value?: string | number;
   label?: string;
-  placeholder?: string;
   className?: string;
   form?: string;
 
@@ -32,31 +31,23 @@ class Field extends React.Component<IProps, IState> {
       focused: !!props.value || false,
       value: this.props.value || '',
     };
-
-    this.validate = this.validate.bind(this);
-    this.focusIn = this.focusIn.bind(this);
-    this.focusOut = this.focusOut.bind(this);
-    this.onChange = this.onChange.bind(this);
-
-    this.generateInput = this.generateInput.bind(this);
-    this.generateWrapper = this.generateWrapper.bind(this);
   }
 
   componentDidUpdate(prevProps: IProps, prevState: IState) {
     if (prevState.value !== this.state.value) this.validate();
   }
 
-  focusIn() {
+  focusIn = () => {
     this.setState({ focused: true });
   }
 
-  focusOut() {
+  focusOut = () => {
     if (!this.state.valid) {
       this.setState({ focused: false });
     }
   }
 
-  validate() {
+  validate = () => {
     const { required } = this.props;
 
     if (required) {
@@ -67,7 +58,7 @@ class Field extends React.Component<IProps, IState> {
     }
   }
 
-  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
 
     this.setState({ value: e.target.value });
@@ -75,18 +66,24 @@ class Field extends React.Component<IProps, IState> {
     onChange && onChange(e);
   }
 
-  generateInput() {
-    const { type, name, placeholder, form } = this.props;
+  generateInput = () => {
+    const {
+      type,
+      name,
+      form,
+      validation,
+      ...other
+    } = this.props;
     const { value } = this.state;
 
     return (
       <input
         // tslint:disable-next-line: prefer-template
         id={`${form ? form + '-' : '' }${name}-field`}
+        {...other}
         name={name}
         type={type}
         value={value}
-        placeholder={placeholder}
 
         onChange={this.onChange}
         onFocus={this.focusIn}
@@ -97,7 +94,7 @@ class Field extends React.Component<IProps, IState> {
     );
   }
 
-  generateWrapper(inner : React.InputHTMLAttributes<HTMLInputElement>) {
+  generateWrapper = (inner : React.InputHTMLAttributes<HTMLInputElement>) => {
     const { type, name, label, className } = this.props;
     const { focused } = this.state;
 

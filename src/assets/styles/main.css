@@ -12,6 +12,7 @@
   -webkit-tap-highlight-color: transparent;
   word-break: break-word;
   outline: none!important;
+  background-color: transparent;
 }
 
 :root {
