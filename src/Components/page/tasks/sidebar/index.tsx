@@ -1,17 +1,27 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { TYPES } from '../../../../core/system/user';
 import { Typography } from '../../../ui';
 
 import * as css from './main.module.css';
 
-const Sidebar : React.FC<{}> = () => {
+interface IProps {
+  username?: TYPES.IUser['username'];
+  email?: TYPES.IUser['email'];
+}
+
+const Sidebar : React.FC<IProps> = (props: IProps) => {
   return (
     <div className={css.sidebar}>
         <img className={css.bg_image} src={`${process.env.ASSETS_URL}images/auth.jpeg`} alt="Sidebar image"/>
         <div className={css.user}>
-          <Typography tag="h3" color="white_2" weight="light">User Name</Typography>
-          <Typography tag="p" color="ash_2" className={css.contact}>e-mail@mail.ru</Typography>
+          <Typography tag="h3" color="white_2" weight="light">
+            {props.username || 'Guest'}
+          </Typography>
+          <Typography tag="p" color="ash_2" className={css.contact}>
+            {props.email || ' '}
+          </Typography>
         </div>
         <div className={css.menu_wrapper}>
           <ul className={css.menu}>
