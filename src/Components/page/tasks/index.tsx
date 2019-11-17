@@ -51,6 +51,11 @@ class TasksPage extends React.Component<Props> {
   }
 
   render() {
+    const {
+      username,
+      email,
+    } = this.props;
+
     return (
       <div className={css.layout}>
         <div className={css.content}>
@@ -75,7 +80,10 @@ class TasksPage extends React.Component<Props> {
             </div>
           </div>
         </div>
-        <Sidebar />
+        <Sidebar
+          username={username}
+          email={email}
+        />
       </div>
     );
   }
