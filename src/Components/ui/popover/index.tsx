@@ -19,15 +19,33 @@ class Popover extends React.Component<IProps> {
   }
 
   componentDidMount() {
-    const { closeHandler } = this.props;
+    const { closeHandler, mountpoint } = this.props;
+    const target =
+      mountpoint &&
+      mountpoint.current;
 
     if (closeHandler) {
       window.addEventListener('keyup', this.escapeHandler);
     }
+
+    if (target) {
+      target.scrollTop = 0;
+      target.style.overflow = 'hidden';
+    }
   }
 
   componentWillUnmount() {
+    const { mountpoint } = this.props;
+    const target =
+      mountpoint &&
+      mountpoint.current;
+
     window.removeEventListener('keyup', this.escapeHandler);
+
+    if (target) {
+      target.scrollTop = 0;
+      target.style.overflow = '';
+    }
   }
 
   escapeHandler(event : KeyboardEvent) {
