@@ -3,6 +3,7 @@ import { Action } from 'redux';
 // Helper data shapes
 export interface IStatus {
   completed: boolean;
+  deleted: boolean;
 }
 
 // Main data shapes

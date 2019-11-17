@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Props } from '../../../containers/tasks';
-import { Button, Typography } from '../../ui';
+import { Typography } from '../../ui';
 
 import Sidebar from './sidebar';
 import Header from './header';
@@ -33,15 +33,18 @@ class TasksPage extends React.Component<Props> {
     const { tasks: { tasks } } = this.props;
 
     return tasks.map(task => (
-      <Task
+      !task.status.deleted && <Task
         mountpoint={this.mountpoint}
         key={task.id}
         id={task.id}
         title={task.title}
         description={task.description}
         status={task.status}
-        delete={() => this.props.deleteTask({ id: task.id })}
-        toggle={() => this.props.toggleTask({ id: task.id, completed: !task.status.completed })}
+        delete={this.props.deleteTask.bind(this, { id: task.id })}
+        toggle={this.props.toggleTask.bind(
+            this,
+            { id: task.id, completed: !task.status.completed },
+          )}
         edit={this.props.editTask}
       />
     ));

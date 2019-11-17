@@ -55,7 +55,6 @@ class AuthForm extends React.Component<IProps> {
           name="username"
           label="Username"
           type="text"
-          placeholder="Enter your full name"
           required={true}
           ref={this.inputs.username}
           className={css.field}
@@ -65,7 +64,6 @@ class AuthForm extends React.Component<IProps> {
           name="email"
           label="E-mail"
           type="text"
-          placeholder="Enter your e-mail"
           required={true}
           ref={this.inputs.email}
           className={css.field}
@@ -75,7 +73,6 @@ class AuthForm extends React.Component<IProps> {
           name="password"
           label="Password"
           type="password"
-          placeholder="Enter your password"
           required={true}
           ref={this.inputs.password}
           className={css.field}
